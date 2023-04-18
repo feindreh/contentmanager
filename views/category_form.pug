@@ -3,11 +3,13 @@ extends layout
 block content
     p #{title}
 
+    p #{err}
+
     form(method='POST' action='')
         label(for='name') Name:
-        input#name(type='text', name='name', required)
+        input#name(type='text', name='name', required,value=(undefined===name ? '' : name))
         br
         label(for='description') description:
-        input#description(type='text', name='description', required)
+        input#description(type='text', name='description', required,value=(undefined===description  ? '' : description))
         br
         button(type='submit') Submit

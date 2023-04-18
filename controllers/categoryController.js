@@ -15,9 +15,16 @@ exports.category_list = async function (req, res, next) {
 };
 // display create form
 exports.category_create_get = (req, res) => {
-  res.render('category_form');
+  res.render('category_form', { title: 'New Category' });
 };
 
-exports.category_create_post = (req, res) => {
-  res.send('make post');
+exports.category_create_post = async (req, res) => {
+  const { name, description } = req.body;
+  const cat = new Category({
+    name, description,
+  });
+
+  cat.save();
+
+  res.redirect('/shop/categorys');
 };

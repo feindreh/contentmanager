@@ -23,6 +23,8 @@ router.post('/category/create', category_controller.category_create_post);
 router.get('/subcategorys', subcategory_controller.subcategory_list);
 
 router.get('/subcategory/create', subcategory_controller.subcategory_create_get);
+
+router.post('/subcategory/create', subcategory_controller.subcategory_create_post);
 // Products
 
 router.get('/products', product_controller.product_list);

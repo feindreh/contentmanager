@@ -22,7 +22,8 @@ exports.category_create_post = async (req, res) => {
   const { name, description } = req.body;
 
   // check if category is already in use
-  const cats = await Category.find({}, { name });
+  const cats = await Category.find({ name });
+
   if (cats.length > 0) {
     res.render('category_form', {
       title: 'New Category',

@@ -1,0 +1,13 @@
+extends layout
+
+block content
+    p #{title}
+
+    form(method='POST' action='')
+        label(for='name') Name:
+        input#name(type='text', name='name', required)
+        br
+        label(for='description') description:
+        input#description(type='text', name='description', required)
+        br
+        button(type='submit') Submit

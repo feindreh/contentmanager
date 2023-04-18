@@ -9,7 +9,7 @@ exports.index = (req, res) => {
 };
 
 // display list of categorys
-exports.category_list = async function (req, res, next) {
+exports.category_list = async (req, res, next) => {
   const cats = await Category.find({});
   res.render('category_list', { list: cats, title: 'Category List' });
 };
@@ -20,11 +20,22 @@ exports.category_create_get = (req, res) => {
 
 exports.category_create_post = async (req, res) => {
   const { name, description } = req.body;
-  const cat = new Category({
-    name, description,
-  });
 
-  cat.save();
-
-  res.redirect('/shop/categorys');
+  // check if category is already in use
+  const cats = await Category.find({}, { name });
+  if (cats.length > 0) {
+    res.render('category_form', {
+      title: 'New Category',
+      name,
+      description,
+      err: `Category Name: ${name} already in use`,
+    });
+  } else {
+    // save category
+    const cat = new Category({
+      name, description,
+    });
+    cat.save();
+    res.redirect('/shop/categorys');
+  }
 };

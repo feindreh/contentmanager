@@ -16,6 +16,8 @@ router.get('/categorys', category_controller.category_list);
 
 router.get('/category/create', category_controller.category_create_get);
 
+router.post('/category/create', category_controller.category_create_post);
+
 // SubCategorys
 
 router.get('/subcategorys', subcategory_controller.subcategory_list);

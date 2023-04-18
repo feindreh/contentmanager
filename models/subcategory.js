@@ -12,4 +12,4 @@ SubCategorySchema.virtual('url').get(function () {
   return `/shop/subcategory/${this._id}`;
 });
 
-module.exports = mongoose.model('Category', SubCategorySchema);
+module.exports = mongoose.model('SubCategory', SubCategorySchema);

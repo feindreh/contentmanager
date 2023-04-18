@@ -12,31 +12,19 @@ router.get('/', category_controller.index);
 
 // Categorys
 
-router.get('/categorys', (req, res) => {
-  res.send('implement /categorys');
-});
+router.get('/categorys', category_controller.category_list);
 
-router.get('/category/create', (req, res) => {
-  res.send('implement /category/create');
-});
+router.get('/category/create', category_controller.category_create_get);
 
 // SubCategorys
 
-router.get('/subcategorys', (req, res) => {
-  res.send('implement /subcategorys');
-});
+router.get('/subcategorys', subcategory_controller.subcategory_list);
 
-router.get('/subcategory/create', (req, res) => {
-  res.send('implement /subcategory/create');
-});
+router.get('/subcategory/create', subcategory_controller.subcategory_create_get);
 // Products
 
-router.get('/products', (req, res) => {
-  res.send('implement /products');
-});
+router.get('/products', product_controller.product_list);
 
-router.get('/product/create', (req, res) => {
-  res.send('implement /product/create');
-});
+router.get('/product/create', product_controller.product_create_get);
 
 module.exports = router;

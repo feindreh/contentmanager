@@ -7,10 +7,13 @@ exports.product_list = async (req, res) => {
   res.render('product_list', { list: prods, title: 'Product List' });
 };
 // display product form
-exports.product_create_get = async (req, res) => {
-  const SubCategorys = await SubCategory.find({});
-  const err = [];
-  res.render('product_form', { title: 'New Product', SubCategorys, err });
+exports.product_create_get = async (req, res, next) => {
+  try {
+    const SubCategorys = await SubCategory.find({});
+    res.render('product_form', { title: 'New Product', SubCategorys });
+  } catch (err) {
+    next(err);
+  }
 };
 // create new Product
 exports.product_create_post = async (req, res) => {
@@ -66,8 +69,28 @@ exports.product_read = async (req, res, next) => {
     next(error);
   }
 };
+// display form with product data
+exports.product_update_get = async (req, res, next) => {
+  try {
+    const [prod, SubCategorys] = await Promise.all([
+      Product.findById(req.params.id).populate('subCategory'),
+      SubCategory.find({}),
+    ]);
 
-exports.product_update_get = async (req, res, next) => { res.send('IMplement me'); };
+    console.log(prod);
+
+    res.render('product_form', {
+      title: 'New Product',
+      SubCategorys,
+      name: prod.name,
+      description: prod.description,
+      price: prod.price,
+      subCategory: prod.subCategory.name,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
 
 exports.product_update_post = async (req, res, next) => { res.send('IMplement me'); };
 

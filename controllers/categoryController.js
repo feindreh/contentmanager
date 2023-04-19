@@ -1,11 +1,21 @@
 const { body, validationResult } = require('express-validator');
 const Category = require('../models/category');
 const SubCategory = require('../models/subcategory');
+const Product = require('../models/product');
 
 // display index page
-exports.index = (req, res) => {
+exports.index = async (req, res) => {
+  const [cats, subCats, prods] = await Promise.all([
+    Category.find({}),
+    SubCategory.find({}),
+    Product.find({}),
+  ]);
+
   res.render('index', {
     title: 'Shop Home',
+    cats: cats.length,
+    subCats: subCats.length,
+    prods: prods.length,
   });
 };
 

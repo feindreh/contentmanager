@@ -1,10 +1,53 @@
 const Product = require('../models/product');
+const SubCategory = require('../models/subcategory');
 
 exports.product_list = async (req, res) => {
   const prods = await Product.find({});
   res.render('product_list', { list: prods, title: 'Product List' });
 };
 
-exports.product_create_get = (req, res) => {
-  res.send('Implement product Create Get');
+exports.product_create_get = async (req, res) => {
+  const SubCategorys = await SubCategory.find({});
+  const err = [];
+  res.render('product_form', { title: 'New Product', SubCategorys, err });
+};
+
+exports.product_create_post = async (req, res) => {
+  const {
+    name, description, subcategory, price,
+  } = req.body;
+
+  const [SubCategorys, products] = await Promise.all([
+    SubCategory.find({}),
+    Product.find({ name }),
+  ]);
+  // check if category is already in use
+  const err = [];
+  if (products.length > 0) {
+    err.push(`Product Name: ${name} already in use`);
+  }
+  if (subcategory === '') {
+    err.push('choose a Sub-Category');
+  }
+
+  if (err.length > 0) {
+    res.render('subcategory_form', {
+      title: 'New Sub-Category',
+      name,
+      description,
+      SubCategorys,
+      err,
+    });
+  } else {
+    // save category
+    const prod = new Product({
+      name, description, subCategory: subcategory, price,
+    });
+    prod.save();
+    res.redirect('/shop/products');
+  }
+};
+
+exports.product_read = (req, res) => {
+  res.send('Implement Read');
 };

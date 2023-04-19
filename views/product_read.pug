@@ -2,18 +2,7 @@ extends layout
 
 block content
 
-  h1 Category: #{cat.name}
-  p #{cat.description}
-
-  div
-
-    h4 subCats
-
-    dl
-      each subCat in subCats
-        dt
-          a(href=subCat.url) #{subCat.name}
-        dd #{subCat.description}
-
-      else
-        p This Cat has no Sub Cats.
+  h1 Products: #{prod.name}
+  p #{prod.description}
+  p  Price : #{prod.price}
+    

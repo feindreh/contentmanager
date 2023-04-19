@@ -68,6 +68,26 @@ exports.product_read = async (req, res, next) => {
 };
 
 exports.product_update_get = async (req, res, next) => { res.send('IMplement me'); };
+
 exports.product_update_post = async (req, res, next) => { res.send('IMplement me'); };
-exports.product_delete_get = async (req, res, next) => { res.send('IMplement me'); };
-exports.product_delete_post = async (req, res, next) => { res.send('IMplement me'); };
+
+// display delete page
+exports.product_delete_get = async (req, res, next) => {
+  try {
+    const prod = await Product.findById(req.params.id);
+    res.render('product_delete', {
+      prod,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+// delete Product
+exports.product_delete_post = async (req, res, next) => {
+  try {
+    await Product.findByIdAndRemove(req.params.id);
+    res.redirect('/shop/products');
+  } catch (err) {
+    next(err);
+  }
+};

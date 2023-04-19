@@ -77,8 +77,6 @@ exports.product_update_get = async (req, res, next) => {
       SubCategory.find({}),
     ]);
 
-    console.log(prod);
-
     res.render('product_form', {
       title: 'New Product',
       SubCategorys,
@@ -91,8 +89,25 @@ exports.product_update_get = async (req, res, next) => {
     next(err);
   }
 };
-
-exports.product_update_post = async (req, res, next) => { res.send('IMplement me'); };
+// update product with new data
+exports.product_update_post = async (req, res, next) => {
+  try {
+    const {
+      name, description, subcategory, price,
+    } = req.body;
+    const prod = new Product({
+      name,
+      description,
+      subCategory: subcategory,
+      price,
+      _id: req.params.id,
+    });
+    await Product.findByIdAndUpdate(req.params.id, prod);
+    res.redirect(`/shop/product/${req.params.id}`);
+  } catch (err) {
+    next(err);
+  }
+};
 
 // display delete page
 exports.product_delete_get = async (req, res, next) => {
@@ -105,6 +120,7 @@ exports.product_delete_get = async (req, res, next) => {
     next(error);
   }
 };
+
 // delete Product
 exports.product_delete_post = async (req, res, next) => {
   try {

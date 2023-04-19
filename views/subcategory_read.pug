@@ -1,0 +1,19 @@
+extends layout
+
+block content
+
+  h1 Sub-Category: #{subCat.name}
+  p #{subCat.description}
+
+  div
+
+    h4 Products
+
+    dl
+      each prod in products
+        dt
+          a(href=prod.url) #{prod.name}
+        dd #{prod.description}
+
+      else
+        p This Sub-Cat has no Products.

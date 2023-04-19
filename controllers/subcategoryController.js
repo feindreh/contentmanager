@@ -1,6 +1,6 @@
 const SubCategory = require('../models/subcategory');
 const Category = require('../models/category');
-const Products = require('../models/product');
+const Product = require('../models/product');
 
 // display ALL subcategorys
 exports.subcategory_list = async (req, res) => {
@@ -52,7 +52,7 @@ exports.subcategory_read = async (req, res, next) => {
   try {
     const [subCat, products] = await Promise.all([
       SubCategory.findById(req.params.id),
-      Products.find({
+      Product.find({
         subCategory: req.params.id,
       }),
     ]);
@@ -71,6 +71,42 @@ exports.subcategory_read = async (req, res, next) => {
 };
 
 exports.subcategory_update_get = async (req, res, next) => { res.send('IMplement me'); };
+
 exports.subcategory_update_post = async (req, res, next) => { res.send('IMplement me'); };
-exports.subcategory_delete_get = async (req, res, next) => { res.send('IMplement me'); };
-exports.subcategory_delete_post = async (req, res, next) => { res.send('IMplement me'); };
+
+// display delete page
+exports.subcategory_delete_get = async (req, res, next) => {
+  try {
+    const [subCat, products] = await Promise.all([
+      SubCategory.findById(req.params.id),
+      Product.find({ subCategory: req.params.id }),
+    ]);
+
+    res.render('subcategory_delete', {
+      subCat,
+      products,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.subcategory_delete_post = async (req, res, next) => {
+  try {
+    const [products, subCat] = await Promise.all([
+      Product.find({ subCategory: req.params.id }),
+      SubCategory.findById(req.params.id),
+    ]);
+    if (products.length > 0) {
+      res.render('subcategory_delete', {
+        subCat,
+        products,
+      });
+    } else {
+      await SubCategory.findByIdAndRemove(req.params.id);
+      res.redirect('/shop/subcategorys');
+    }
+  } catch (err) {
+    next(err);
+  }
+};

@@ -1,5 +1,6 @@
 const SubCategory = require('../models/subcategory');
 const Category = require('../models/category');
+const Products = require('../models/product');
 
 exports.subcategory_list = async (req, res) => {
   const subCats = await SubCategory.find({});
@@ -46,6 +47,24 @@ exports.subcategory_create_post = async (req, res) => {
   }
 };
 
-exports.subcategory_read = (req, res) => {
-  res.send('Implement Read');
+exports.subcategory_read = async (req, res, next) => {
+  try {
+    const [subCat, products] = await Promise.all([
+      SubCategory.findById(req.params.id),
+      Products.find({
+        subCategory: req.params.id,
+      }),
+    ]);
+
+    if (subCat === null) {
+      throw new Error(' subCat Not Found');
+    }
+
+    res.render('subcategory_read', {
+      subCat,
+      products,
+    });
+  } catch (error) {
+    next(error);
+  }
 };

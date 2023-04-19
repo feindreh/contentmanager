@@ -66,3 +66,8 @@ exports.product_read = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.product_update_get = async (req, res, next) => { res.send('IMplement me'); };
+exports.product_update_post = async (req, res, next) => { res.send('IMplement me'); };
+exports.product_delete_get = async (req, res, next) => { res.send('IMplement me'); };
+exports.product_delete_post = async (req, res, next) => { res.send('IMplement me'); };

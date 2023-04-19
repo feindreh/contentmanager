@@ -69,3 +69,8 @@ exports.subcategory_read = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.subcategory_update_get = async (req, res, next) => { res.send('IMplement me'); };
+exports.subcategory_update_post = async (req, res, next) => { res.send('IMplement me'); };
+exports.subcategory_delete_get = async (req, res, next) => { res.send('IMplement me'); };
+exports.subcategory_delete_post = async (req, res, next) => { res.send('IMplement me'); };

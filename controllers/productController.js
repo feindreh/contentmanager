@@ -48,6 +48,20 @@ exports.product_create_post = async (req, res) => {
   }
 };
 
-exports.product_read = (req, res) => {
-  res.send('Implement Read');
+exports.product_read = async (req, res, next) => {
+  try {
+    const [prod] = await Promise.all([
+      Product.findById(req.params.id),
+    ]);
+
+    if (prod === null) {
+      throw new Error(' Prod Not Found');
+    }
+
+    res.render('product_read', {
+      prod,
+    });
+  } catch (error) {
+    next(error);
+  }
 };

@@ -1,17 +1,18 @@
 const Product = require('../models/product');
 const SubCategory = require('../models/subcategory');
 
+// display list of ALL products
 exports.product_list = async (req, res) => {
   const prods = await Product.find({});
   res.render('product_list', { list: prods, title: 'Product List' });
 };
-
+// display product form
 exports.product_create_get = async (req, res) => {
   const SubCategorys = await SubCategory.find({});
   const err = [];
   res.render('product_form', { title: 'New Product', SubCategorys, err });
 };
-
+// create new Product
 exports.product_create_post = async (req, res) => {
   const {
     name, description, subcategory, price,
@@ -47,7 +48,7 @@ exports.product_create_post = async (req, res) => {
     res.redirect('/shop/products');
   }
 };
-
+// display single product
 exports.product_read = async (req, res, next) => {
   try {
     const [prod] = await Promise.all([

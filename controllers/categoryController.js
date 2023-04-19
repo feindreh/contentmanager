@@ -18,7 +18,7 @@ exports.category_list = async (req, res) => {
 exports.category_create_get = (req, res) => {
   res.render('category_form', { title: 'New Category' });
 };
-
+// create new Category
 exports.category_create_post = async (req, res) => {
   const { name, description } = req.body;
 
@@ -41,7 +41,7 @@ exports.category_create_post = async (req, res) => {
     res.redirect('/shop/categorys');
   }
 };
-
+// display single Category
 exports.category_read = async (req, res, next) => {
   try {
     const [cat, subCats] = await Promise.all([

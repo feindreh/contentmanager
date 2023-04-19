@@ -2,17 +2,18 @@ const SubCategory = require('../models/subcategory');
 const Category = require('../models/category');
 const Products = require('../models/product');
 
+// display ALL subcategorys
 exports.subcategory_list = async (req, res) => {
   const subCats = await SubCategory.find({});
   res.render('subcategory_list', { list: subCats, title: 'Sub-Category List' });
 };
-
+// display create form
 exports.subcategory_create_get = async (req, res) => {
   const categorys = await Category.find({});
   const err = [];
   res.render('subcategory_form', { title: 'New Sub-Category', categorys, err });
 };
-
+// create new subcat
 exports.subcategory_create_post = async (req, res) => {
   const { name, description, category } = req.body;
 
@@ -46,7 +47,7 @@ exports.subcategory_create_post = async (req, res) => {
     res.redirect('/shop/subcategorys');
   }
 };
-
+// display single subcat
 exports.subcategory_read = async (req, res, next) => {
   try {
     const [subCat, products] = await Promise.all([

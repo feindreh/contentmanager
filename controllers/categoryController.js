@@ -1,4 +1,3 @@
-const { body, validationResult } = require('express-validator');
 const Category = require('../models/category');
 const SubCategory = require('../models/subcategory');
 const Product = require('../models/product');
@@ -24,10 +23,12 @@ exports.category_list = async (req, res) => {
   const cats = await Category.find({});
   res.render('category_list', { list: cats, title: 'Category List' });
 };
+
 // display create form
 exports.category_create_get = (req, res) => {
   res.render('category_form', { title: 'New Category' });
 };
+
 // create new Category
 exports.category_create_post = async (req, res) => {
   const { name, description } = req.body;
@@ -51,6 +52,7 @@ exports.category_create_post = async (req, res) => {
     res.redirect('/shop/categorys');
   }
 };
+
 // display single Category
 exports.category_read = async (req, res, next) => {
   try {
@@ -74,9 +76,32 @@ exports.category_read = async (req, res, next) => {
   }
 };
 
-//
-exports.category_update_get = async (req, res, next) => { res.send('IMplement me'); };
-exports.category_update_post = async (req, res, next) => { res.send('IMplement me'); };
+// display form with category data
+exports.category_update_get = async (req, res, next) => {
+  try {
+    const cat = await Category.findById(req.params.id);
+    res.render('category_form', {
+      title: 'New Category',
+      name: cat.name,
+      description: cat.description,
+    });
+  } catch (err) { next(err); }
+};
+
+// update category with new data
+exports.category_update_post = async (req, res, next) => {
+  try {
+    const { name, description } = req.body;
+
+    const cat = new Category({
+      name,
+      description,
+      _id: req.params.id,
+    });
+    await Category.findByIdAndUpdate(req.params.id, cat);
+    res.redirect(`/shop/category/${req.params.id}`);
+  } catch (err) { next(err); }
+};
 
 // display delete
 exports.category_delete_get = async (req, res, next) => {

@@ -6,6 +6,7 @@ exports.product_list = async (req, res) => {
   const prods = await Product.find({});
   res.render('product_list', { list: prods, title: 'Product List' });
 };
+
 // display product form
 exports.product_create_get = async (req, res, next) => {
   try {
@@ -15,6 +16,7 @@ exports.product_create_get = async (req, res, next) => {
     next(err);
   }
 };
+
 // create new Product
 exports.product_create_post = async (req, res) => {
   const {
@@ -51,6 +53,7 @@ exports.product_create_post = async (req, res) => {
     res.redirect('/shop/products');
   }
 };
+
 // display single product
 exports.product_read = async (req, res, next) => {
   try {
@@ -69,6 +72,7 @@ exports.product_read = async (req, res, next) => {
     next(error);
   }
 };
+
 // display form with product data
 exports.product_update_get = async (req, res, next) => {
   try {
@@ -89,6 +93,7 @@ exports.product_update_get = async (req, res, next) => {
     next(err);
   }
 };
+
 // update product with new data
 exports.product_update_post = async (req, res, next) => {
   try {

@@ -3,10 +3,6 @@ extends layout
 block content
     p #{title}
 
-    p 
-        each error in err 
-            p #{error}
-
     form(method='POST' action='')
         label(for='name') Name:
         input#name(type='text', name='name', required,value=(undefined===name ? '' : name))
@@ -21,6 +17,6 @@ block content
         select(type='select' placeholder='Select Sub-Category' name='subcategory' required='true')
             option(value="") Select Sub-Category
             each option in SubCategorys
-                option(value=option._id) #{option.name}
+                option(value=option._id selected=(option.name === subCategory))  #{option.name}
         br
         button(type='submit') Submit

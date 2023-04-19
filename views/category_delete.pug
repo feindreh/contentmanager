@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1 Delete Category: #{cat.name}
+
+  if subCats.length
+    p #[strong Delete the following Sub-Categorys before attempting to delete this Category.]
+    div
+      h4 Sub Categorys
+      dl
+      each sub in subCats
+        dt
+          a(href=sub.url) #{sub.name}
+        dd #{sub.description}
+  else
+    p Do you really want to delete this Category?
+    form(method='POST' action='')
+      div
+        input(type='hidden',name='categoryid', required='true', value=cat._id )
+      button(type='submit') Delete
+
+

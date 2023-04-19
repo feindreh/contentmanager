@@ -7,46 +7,14 @@ exports.subcategory_list = async (req, res) => {
   const subCats = await SubCategory.find({});
   res.render('subcategory_list', { list: subCats, title: 'Sub-Category List' });
 };
+
 // display create form
 exports.subcategory_create_get = async (req, res) => {
   const categorys = await Category.find({});
   const err = [];
   res.render('subcategory_form', { title: 'New Sub-Category', categorys, err });
 };
-// create new subcat
-exports.subcategory_create_post = async (req, res) => {
-  const { name, description, category } = req.body;
 
-  const [subCats, categorys] = await Promise.all([
-    SubCategory.find({ name }),
-    Category.find({}),
-  ]);
-  // check if category is already in use
-  const err = [];
-  if (subCats.length > 0) {
-    err.push(`Sub-Category Name: ${name} already in use`);
-  }
-  if (category === '') {
-    err.push('choose a Category');
-  }
-
-  if (err.length > 0) {
-    res.render('subcategory_form', {
-      title: 'New Sub-Category',
-      name,
-      description,
-      categorys,
-      err,
-    });
-  } else {
-    // save category
-    const subcat = new SubCategory({
-      name, description, category,
-    });
-    subcat.save();
-    res.redirect('/shop/subcategorys');
-  }
-};
 // display single subcat
 exports.subcategory_read = async (req, res, next) => {
   try {
@@ -70,9 +38,80 @@ exports.subcategory_read = async (req, res, next) => {
   }
 };
 
-exports.subcategory_update_get = async (req, res, next) => { res.send('IMplement me'); };
+// create new subcat
+exports.subcategory_create_post = async (req, res, next) => {
+  try {
+    const { name, description, category } = req.body;
 
-exports.subcategory_update_post = async (req, res, next) => { res.send('IMplement me'); };
+    const [subCats, categorys] = await Promise.all([
+      SubCategory.find({ name }),
+      Category.find({}),
+    ]);
+    // check if category is already in use
+    const err = [];
+    if (subCats.length > 0) {
+      err.push(`Sub-Category Name: ${name} already in use`);
+    }
+    if (category === '') {
+      err.push('choose a Category');
+    }
+
+    if (err.length > 0) {
+      res.render('subcategory_form', {
+        title: 'New Sub-Category',
+        name,
+        description,
+        categorys,
+        err,
+      });
+    } else {
+    // save category
+      const subcat = new SubCategory({
+        name, description, category,
+      });
+      subcat.save();
+      res.redirect('/shop/subcategorys');
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+// display form with subcategory data
+exports.subcategory_update_get = async (req, res, next) => {
+  try {
+    const [subCat, categorys] = await Promise.all([
+      SubCategory.findById(req.params.id).populate('category'),
+      Category.find({}),
+    ]);
+
+    const { name, description, category } = subCat;
+
+    res.render('subcategory_form', {
+      title: 'New Sub-Category',
+      name,
+      description,
+      categorys,
+      category,
+      err: [],
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+// update subcategory with new data
+exports.subcategory_update_post = async (req, res, next) => {
+  try {
+    const { name, description, category } = req.body;
+    const subcat = new SubCategory({
+      name, description, category, _id: req.params.id,
+    });
+    await SubCategory.findByIdAndUpdate(req.params.id, subcat);
+    res.redirect(`/shop/subcategory/${req.params.id}`);
+  } catch (err) {
+    next(err);
+  }
+};
 
 // display delete page
 exports.subcategory_delete_get = async (req, res, next) => {
@@ -90,7 +129,7 @@ exports.subcategory_delete_get = async (req, res, next) => {
     next(err);
   }
 };
-
+// delete subcategory
 exports.subcategory_delete_post = async (req, res, next) => {
   try {
     const [products, subCat] = await Promise.all([

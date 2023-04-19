@@ -1,5 +1,6 @@
 const { body, validationResult } = require('express-validator');
 const Category = require('../models/category');
+const SubCategory = require('../models/subcategory');
 
 // display index page
 exports.index = (req, res) => {
@@ -38,5 +39,27 @@ exports.category_create_post = async (req, res) => {
     });
     cat.save();
     res.redirect('/shop/categorys');
+  }
+};
+
+exports.category_read = async (req, res, next) => {
+  try {
+    const [cat, subCats] = await Promise.all([
+      Category.findById(req.params.id),
+      SubCategory.find({
+        category: req.params.id,
+      }),
+    ]);
+
+    if (cat === null) {
+      throw new Error(' Cat Not Found');
+    }
+
+    res.render('category_read', {
+      cat,
+      subCats,
+    });
+  } catch (error) {
+    next(error);
   }
 };

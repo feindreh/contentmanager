@@ -45,3 +45,7 @@ exports.subcategory_create_post = async (req, res) => {
     res.redirect('/shop/subcategorys');
   }
 };
+
+exports.subcategory_read = (req, res) => {
+  res.send('Implement Read');
+};

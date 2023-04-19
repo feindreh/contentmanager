@@ -5,6 +5,7 @@ const { Schema } = mongoose;
 const ProductSchema = new Schema({
   name: { type: String, required: true, maxLength: 100 },
   description: { type: String, required: true },
+  price: { type: Number, required: true },
   subCategory: { type: Schema.Types.ObjectId, ref: 'SubCategory', required: true },
 });
 

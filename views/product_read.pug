@@ -6,3 +6,8 @@ block content
   p #{prod.description}
   p  Price : #{prod.price}
     
+  hr
+  p
+    a(href=prod.url+'/delete') Delete Product
+  p
+    a(href=prod.url+'/update') Update Product

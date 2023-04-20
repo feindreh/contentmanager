@@ -92,7 +92,7 @@ exports.subcategory_update_get = async (req, res, next) => {
       name,
       description,
       categorys,
-      category,
+      categoryName: category.name,
       err: [],
     });
   } catch (err) {

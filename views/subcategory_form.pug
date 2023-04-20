@@ -18,6 +18,6 @@ block content
         select(type='select' placeholder='Select Category' name='category' required='true')
             option(value="") Select Category
             each option in categorys
-                option(value=option._id selected=(option.name === category.name)) #{option.name}
+                option(value=option._id selected=(option.name === categoryName)) #{option.name}
         br
         button(type='submit') Submit

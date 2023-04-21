@@ -6,6 +6,7 @@ const SubCategorySchema = new Schema({
   name: { type: String, required: true, maxLength: 100 },
   description: { type: String, required: true },
   category: { type: Schema.Types.ObjectId, ref: 'Category', required: true },
+  image: { type: Schema.Types.ObjectId, ref: 'Image' },
 });
 
 SubCategorySchema.virtual('url').get(function () {

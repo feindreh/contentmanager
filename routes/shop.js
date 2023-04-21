@@ -70,12 +70,18 @@ router.post('/product/:id/delete', product_controller.product_delete_post);
 
 // Images
 
-router.get('/image', image_controller.image_upload_get);
+router.get('/category/:id/image', image_controller.category_image_get);
 
-router.post('/image', upload.single('image'), image_controller.image_upload_post);
+router.post('/category/:id/image', upload.single('image'), image_controller.category_image_post);
 
-router.get('/view/:id', image_controller.image_detail);
+router.get('/subcategory/:id/image', image_controller.subcategory_image_get);
 
-router.get('/images/:id', image_controller.image_images);
+router.post('/subcategory/:id/image', upload.single('image'), image_controller.subcategory_image_post);
+
+router.get('/product/:id/image', image_controller.product_image_get);
+
+router.post('/product/:id/image', upload.single('image'), image_controller.product_image_post);
+
+router.get('/getimage/:id', image_controller.image_images);
 
 module.exports = router;

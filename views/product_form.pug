@@ -3,7 +3,7 @@ extends layout
 block content
     p #{title}
 
-    form(method='POST' action='')
+    form(method='POST' action='' enctype="multipart/form-data")
         label(for='name') Name:
         input#name(type='text', name='name', required,value=(undefined===name ? '' : name))
         br

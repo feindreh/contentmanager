@@ -7,7 +7,7 @@ block content
         each error in err 
             p #{error}
 
-    form(method='POST' action='')
+    form(method='POST' action='' enctype="multipart/form-data")
         label(for='name') Name:
         input#name(type='text', name='name', required,value=(undefined===name ? '' : name))
         br

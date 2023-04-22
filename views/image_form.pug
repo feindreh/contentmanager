@@ -1,0 +1,14 @@
+extends layout
+
+block content
+
+    h2 Edit Image for the Category: #{name}
+    p #{description}
+
+
+    if (image.length === 0) 
+        form(method='POST' action='' enctype="multipart/form-data")
+            input(type="file" name="image")
+            button(type='submit') Submit
+    else 
+        a(href = "/shop/image/"+id+"/delete") delete Image?

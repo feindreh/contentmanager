@@ -4,12 +4,12 @@ block content
 
   h1 Category: #{cat.name}
   p #{cat.description}
-
+  img(src=imageURL alt="No Image")
   div
 
     h4 subCats
 
-    img(src=imageURL alt="No Image")
+    
 
     dl
       each subCat in subCats

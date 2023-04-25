@@ -6,18 +6,6 @@ const CategoryImage = require('../models/categoryImage');
 const SubCategoryImage = require('../models/subCategoryImage');
 const ProductImage = require('../models/productImage');
 
-// exports.image_upload_post = async (req, res, next) => {
-//   const newImage = new ProductImageSchema({
-//     name: 'Hello DB 3',
-//     image: {
-//       data: req.file.buffer,
-//       contentType: req.file.mimetype,
-//     },
-//   });
-//   newImage.save();
-//   res.send('uploaded');
-// };
-
 exports.category_image_get = async (req, res, next) => {
   try {
     const [cat, image] = await Promise.all([
@@ -60,11 +48,6 @@ exports.product_image_get = async (req, res, next) => {
 };
 exports.product_image_post = async (req, res, next) => {
   res.send('Implement Me');
-};
-
-exports.image = async (req, res, next) => {
-  const { id } = req.params;
-  res.render('image_detail', { ImageUrl: `/shop/getimages/${id}` });
 };
 
 exports.image_delete_get = async (req, res, next) => {

@@ -3,19 +3,21 @@ const SubCategory = require('../models/subcategory');
 const Product = require('../models/product');
 
 // display index page
-exports.index = async (req, res) => {
-  const [cats, subCats, prods] = await Promise.all([
-    Category.find({}),
-    SubCategory.find({}),
-    Product.find({}),
-  ]);
+exports.index = async (req, res, next) => {
+  try {
+    const [cats, subCats, prods] = await Promise.all([
+      Category.find({}),
+      SubCategory.find({}),
+      Product.find({}),
+    ]);
 
-  res.render('index', {
-    title: 'Shop Home',
-    cats: cats.length,
-    subCats: subCats.length,
-    prods: prods.length,
-  });
+    res.render('index', {
+      title: 'Shop Home',
+      cats: cats.length,
+      subCats: subCats.length,
+      prods: prods.length,
+    });
+  } catch (err) { next(err); }
 };
 
 // display list of categorys

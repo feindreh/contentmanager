@@ -10,15 +10,17 @@ exports.category_image_get = async (req, res, next) => {
   try {
     const [cat, image] = await Promise.all([
       Category.findById(req.params.id),
-      CategoryImage.find({ category: req.params.id }),
+      CategoryImage.findOne({ category: req.params.id }),
     ]);
-
+    const ImageUrl = `/shop/category/getImage/${req.params.id}`;
+    console.log(image);
     res.render('image_form', {
       name: cat.name,
       description: cat.description,
       id: req.params.id,
       image,
       type: 'category',
+      ImageUrl,
     });
   } catch (err) { next(err); }
 };

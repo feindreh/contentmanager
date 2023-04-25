@@ -84,6 +84,8 @@ router.post('/product/:id/image', upload.single('image'), image_controller.produ
 
 router.get('/image/:id', image_controller.image);
 
-router.get('/image/:id/delete', image_controller.image_delete);
+router.get('/image/:id/:type/delete', image_controller.image_delete_get);
+
+router.post('/image/:id/:type/delete', image_controller.image_delete_post);
 
 module.exports = router;

@@ -5,10 +5,11 @@ block content
     h2 Edit Image for the Category: #{name}
     p #{description}
 
-
-    if (image.length === 0) 
+    
+    if (image === null) 
         form(method='POST' action='' enctype="multipart/form-data")
             input(type="file" name="image")
             button(type='submit') Submit
-    else 
-        a(href = "/shop/image/"+image[0]._id+"/"+type+"/delete") delete Image?
+    else
+        img(src=ImageUrl alt="Image not loaded") 
+        a(href = "/shop/image/"+image._id+"/"+type+"/delete") delete Image?

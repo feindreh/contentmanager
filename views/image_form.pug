@@ -11,4 +11,4 @@ block content
             input(type="file" name="image")
             button(type='submit') Submit
     else 
-        a(href = "/shop/image/"+id+"/delete") delete Image?
+        a(href = "/shop/image/"+image[0]._id+"/"+type+"/delete") delete Image?

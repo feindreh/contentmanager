@@ -1,6 +1,6 @@
 const Product = require('../models/product');
 const SubCategory = require('../models/subcategory');
-
+const ProductImage = require('../models/productImage');
 // display list of ALL products
 exports.product_list = async (req, res) => {
   const prods = await Product.find({});
@@ -134,4 +134,13 @@ exports.product_delete_post = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+};
+
+exports.product_getImage = async (req, res, next) => {
+  try {
+    const prodID = req.params.id;
+    const ImageFile = await ProductImage.findOne({ category: prodID });
+    res.set('Content-Type', ImageFile.image.contentType);
+    res.send(ImageFile.image.data);
+  } catch (err) { next(err); }
 };

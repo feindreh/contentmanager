@@ -1,7 +1,7 @@
 const SubCategory = require('../models/subcategory');
 const Category = require('../models/category');
 const Product = require('../models/product');
-
+const SubCategoryImage = require('../models/subCategoryImage');
 // display ALL subcategorys
 exports.subcategory_list = async (req, res) => {
   const subCats = await SubCategory.find({});
@@ -148,4 +148,13 @@ exports.subcategory_delete_post = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+};
+
+exports.subcategory_getImage = async (req, res, next) => {
+  try {
+    const subCatID = req.params.id;
+    const ImageFile = await SubCategoryImage.findOne({ category: subCatID });
+    res.set('Content-Type', ImageFile.image.contentType);
+    res.send(ImageFile.image.data);
+  } catch (err) { next(err); }
 };

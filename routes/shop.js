@@ -52,6 +52,8 @@ router.get('/subcategory/:id/delete', subcategory_controller.subcategory_delete_
 
 router.post('/subcategory/:id/delete', subcategory_controller.subcategory_delete_post);
 
+router.get('/subcategory/getImage/:id', subcategory_controller.subcategory_getImage);
+
 // Products
 
 router.get('/products', product_controller.product_list);
@@ -69,6 +71,8 @@ router.post('/product/:id/update', upload.single('image'), product_controller.pr
 router.get('/product/:id/delete', product_controller.product_delete_get);
 
 router.post('/product/:id/delete', product_controller.product_delete_post);
+
+router.get('/product/getImage/:id', product_controller.product_getImage);
 
 // Images
 

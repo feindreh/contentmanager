@@ -1,6 +1,7 @@
 const Category = require('../models/category');
 const SubCategory = require('../models/subcategory');
 const Product = require('../models/product');
+const CategoryImage = require('../models/categoryImage');
 
 // display index page
 exports.index = async (req, res, next) => {
@@ -69,9 +70,12 @@ exports.category_read = async (req, res, next) => {
       throw new Error(' Cat Not Found');
     }
 
+    const imageURL = `/shop/category/getImage/${req.params.id}`;
+
     res.render('category_read', {
       cat,
       subCats,
+      imageURL,
     });
   } catch (error) {
     next(error);
@@ -141,4 +145,13 @@ exports.category_delete_post = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+};
+
+exports.category_getImage = async (req, res, next) => {
+  try {
+    const catID = req.params.id;
+    const ImageFile = await CategoryImage.findOne({ category: catID });
+    res.set('Content-Type', ImageFile.image.contentType);
+    res.send(ImageFile.image.data);
+  } catch (err) { next(err); }
 };

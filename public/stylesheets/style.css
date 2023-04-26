@@ -1,48 +1,44 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+.outerWrap{
+    --dark:black;
+    --light:white;
+    --big:calc(var(--normal)*1.6);
+    --normal:calc(var(--small)*1.6);
+    --small:1rem;
+    min-height:100dvh;
+    font-size: var(--small);
 }
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
+
+.innerWrap{
+    min-height:100dvh;
+    max-width: 80rem;
+    margin-left:auto;
+    margin-right:auto;
 }
-body {
-	line-height: 1;
+
+.header{
+    border:solid black 1px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap:wrap;
+    gap:var(--small);
 }
-ol, ul {
-	list-style: none;
+
+#dropdown{
+    position:relative;
 }
-blockquote, q {
-	quotes: none;
+#menu{
+    position: absolute;
+    background: grey;
+    display: flex;
+    flex-direction: column;
+    gap: var(--small);
+    visibility: hidden;
+    padding: var(--small);
+    transform: translate(calc(var(--small)/-1),0px);
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
+
+.main{
+    border:solid black 1px;
 }
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
+

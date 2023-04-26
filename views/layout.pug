@@ -9,20 +9,19 @@ html(lang='en')
     script(src='/javascripts/script.js', defer)
   body
   div.outerWrap
-    div.innerWrap
       div.header
-        div 
+        div.nav 
           a(href="/shop") Home
-        div
+        div.nav
           a(href="/shop/categorys") Categorys
-        div
+        div.nav
           a(href="/shop/subcategorys") Subcategroys
-        div
+        div.nav
           a(href="/shop/products") Products
-        div#dropdown Create New...
+        div#dropdown.nav Create New...
           div#menu
-            a(href="/shop/category/create") ...Category
-            a(href="/shop/subcategory/create") ...Subcategory
-            a(href="/shop/product/create") ...Product
+            a.nav(href="/shop/category/create") ...Category
+            a.nav(href="/shop/subcategory/create") ...Subcategory
+            a.nav(href="/shop/product/create") ...Product
       div.main 
         block content

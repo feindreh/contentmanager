@@ -112,14 +112,17 @@ exports.category_update_post = async (req, res, next) => {
 // display delete
 exports.category_delete_get = async (req, res, next) => {
   try {
-    const [cat, subCats] = await Promise.all([
+    const [cat, subCats, img] = await Promise.all([
       Category.findById(req.params.id),
       SubCategory.find({ category: req.params.id }),
+      CategoryImage.findOne({ categroy: req.params.id }),
     ]);
-
+    console.log('IMMMMMMMMMMMMMMG');
+    console.log(img);
     res.render('category_delete', {
       cat,
       subCats,
+      img,
     });
   } catch (err) {
     next(err);
@@ -129,14 +132,18 @@ exports.category_delete_get = async (req, res, next) => {
 // delete Category
 exports.category_delete_post = async (req, res, next) => {
   try {
-    const [cat, subCats] = await Promise.all([
+    const [cat, subCats, img] = await Promise.all([
       Category.findById(req.params.id),
       SubCategory.find({ category: req.params.id }),
+      CategoryImage.findOne({ categroy: req.params.id }),
     ]);
-    if (subCats.length > 0) {
+    console.log('IMMMMMMMMMMMMMMG');
+    console.log(img);
+    if (subCats.length > 0 || img !== null) {
       res.render('category_delete', {
         cat,
         subCats,
+        img,
       });
     } else {
       await Category.findByIdAndRemove(req.params.id);

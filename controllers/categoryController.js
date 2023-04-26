@@ -117,8 +117,6 @@ exports.category_delete_get = async (req, res, next) => {
       SubCategory.find({ category: req.params.id }),
       CategoryImage.findOne({ categroy: req.params.id }),
     ]);
-    console.log('IMMMMMMMMMMMMMMG');
-    console.log(img);
     res.render('category_delete', {
       cat,
       subCats,
@@ -135,10 +133,8 @@ exports.category_delete_post = async (req, res, next) => {
     const [cat, subCats, img] = await Promise.all([
       Category.findById(req.params.id),
       SubCategory.find({ category: req.params.id }),
-      CategoryImage.findOne({ categroy: req.params.id }),
+      CategoryImage.findOne({ category: req.params.id }),
     ]);
-    console.log('IMMMMMMMMMMMMMMG');
-    console.log(img);
     if (subCats.length > 0 || img !== null) {
       res.render('category_delete', {
         cat,

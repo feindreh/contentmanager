@@ -13,7 +13,6 @@ exports.category_image_get = async (req, res, next) => {
       CategoryImage.findOne({ category: req.params.id }),
     ]);
     const ImageUrl = `/shop/category/getImage/${req.params.id}`;
-    console.log(image);
     res.render('image_form', {
       name: cat.name,
       description: cat.description,
@@ -40,16 +39,65 @@ exports.category_image_post = async (req, res, next) => {
 };
 
 exports.subcategory_image_get = async (req, res, next) => {
-  res.send('Implement Me');
+  try {
+    const [cat, image] = await Promise.all([
+      SubCategory.findById(req.params.id),
+      SubCategoryImage.findOne({ category: req.params.id }),
+    ]);
+    const ImageUrl = `/shop/subcategory/getImage/${req.params.id}`;
+    res.render('image_form', {
+      name: cat.name,
+      description: cat.description,
+      id: req.params.id,
+      image,
+      type: 'subcategory',
+      ImageUrl,
+    });
+  } catch (err) { next(err); }
 };
 exports.subcategory_image_post = async (req, res, next) => {
-  res.send('Implement Me');
+  try {
+    const newImage = new SubCategoryImage({
+      image: {
+        data: req.file.buffer,
+        contentType: req.file.mimetype,
+      },
+      category: req.params.id,
+    });
+    await newImage.save();
+    res.redirect(`/shop/subcategory/${req.params.id}/image`);
+  } catch (err) { next(err); }
 };
+
 exports.product_image_get = async (req, res, next) => {
-  res.send('Implement Me');
+  try {
+    const [cat, image] = await Promise.all([
+      Product.findById(req.params.id),
+      ProductImage.findOne({ category: req.params.id }),
+    ]);
+    const ImageUrl = `/shop/product/getImage/${req.params.id}`;
+    res.render('image_form', {
+      name: cat.name,
+      description: cat.description,
+      id: req.params.id,
+      image,
+      type: 'product',
+      ImageUrl,
+    });
+  } catch (err) { next(err); }
 };
 exports.product_image_post = async (req, res, next) => {
-  res.send('Implement Me');
+  try {
+    const newImage = new ProductImage({
+      image: {
+        data: req.file.buffer,
+        contentType: req.file.mimetype,
+      },
+      category: req.params.id,
+    });
+    await newImage.save();
+    res.redirect(`/shop/product/${req.params.id}/image`);
+  } catch (err) { next(err); }
 };
 
 exports.image_delete_get = async (req, res, next) => {
@@ -62,7 +110,13 @@ exports.image_delete_post = async (req, res, next) => {
     if (type === 'category') {
       await CategoryImage.findByIdAndRemove(id);
       res.redirect('/');
+    } else if (type === 'product') {
+      await ProductImage.findByIdAndRemove(id);
+      res.redirect('/');
+    } else if (type === 'subcategory') {
+      await SubCategoryImage.findByIdAndRemove(id);
+      res.redirect('/');
     }
-    res.send('type not found // image_delete_post');
+    res.send(`type not found // image_delete_post // ${type}`);
   } catch (err) { next(err); }
 };

@@ -117,14 +117,16 @@ exports.subcategory_update_post = async (req, res, next) => {
 // display delete page
 exports.subcategory_delete_get = async (req, res, next) => {
   try {
-    const [subCat, products] = await Promise.all([
+    const [subCat, products, img] = await Promise.all([
       SubCategory.findById(req.params.id),
       Product.find({ subCategory: req.params.id }),
+      SubCategoryImage.findOne({ category: req.params.id }),
     ]);
-
+    console.log(img);
     res.render('subcategory_delete', {
       subCat,
       products,
+      img,
     });
   } catch (err) {
     next(err);
@@ -133,14 +135,16 @@ exports.subcategory_delete_get = async (req, res, next) => {
 // delete subcategory
 exports.subcategory_delete_post = async (req, res, next) => {
   try {
-    const [products, subCat] = await Promise.all([
+    const [products, subCat, img] = await Promise.all([
       Product.find({ subCategory: req.params.id }),
       SubCategory.findById(req.params.id),
+      SubCategoryImage.findOne({ categroy: req.params.id }),
     ]);
-    if (products.length > 0) {
+    if (products.length > 0 || img !== null) {
       res.render('subcategory_delete', {
         subCat,
         products,
+        img,
       });
     } else {
       await SubCategory.findByIdAndRemove(req.params.id);

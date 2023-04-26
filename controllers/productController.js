@@ -118,9 +118,13 @@ exports.product_update_post = async (req, res, next) => {
 // display delete page
 exports.product_delete_get = async (req, res, next) => {
   try {
-    const prod = await Product.findById(req.params.id);
+    const [prod, img] = await Promise.all([
+      Product.findById(req.params.id),
+      ProductImage.findOne({ category: req.params.id }),
+    ]);
     res.render('product_delete', {
       prod,
+      img,
     });
   } catch (error) {
     next(error);
@@ -130,6 +134,16 @@ exports.product_delete_get = async (req, res, next) => {
 // delete Product
 exports.product_delete_post = async (req, res, next) => {
   try {
+    const [prod, img] = await Promise.all([
+      Product.findById(req.params.id),
+      ProductImage.findOne({ category: req.params.id }),
+    ]);
+    if (img !== null) {
+      res.render('product_delete', {
+        prod,
+        img,
+      });
+    }
     await Product.findByIdAndRemove(req.params.id);
     res.redirect('/shop/products');
   } catch (err) {

@@ -6,7 +6,7 @@
     --normal:calc(var(--small)*1.6);
     --small:1rem;
     min-height:100dvh;
-    font-size: var(--small);
+    font-size: var(--normal);
 }
 
 .innerWrap{
@@ -14,6 +14,8 @@
     max-width: 80rem;
     margin-left:auto;
     margin-right:auto;
+    display:flex;
+    flex-direction: column;
 }
 
 .header{
@@ -21,13 +23,14 @@
     display: flex;
     justify-content: space-around;
     flex-wrap:wrap;
-    gap:var(--small);
+    gap:var(--normal);
 }
 
 #dropdown{
     position:relative;
 }
 #menu{
+    
     position: absolute;
     background: grey;
     display: flex;
@@ -40,5 +43,6 @@
 
 .main{
     border:solid black 1px;
+    flex:1;
 }
 

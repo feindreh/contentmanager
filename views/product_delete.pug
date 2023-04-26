@@ -1,12 +1,18 @@
 extends layout
 
 block content
-  h1 Delete Product: #{prod.name}
 
-    p Do you really want to delete this Product?
+  if img !== null 
+    p Delete 
+      a(href="/shop/product/"+prod._id+"/image") Image
+      |  before attempting to delete this Product
+  else
+    h1 Delete Product: #{prod.name}
 
-    form(method='POST' action='')
-      div
-        input(type='hidden',name='productid', required='true', value=prod._id )
+      p Do you really want to delete this Product?
 
-      button(type='submit') Delete
+      form(method='POST' action='')
+        div
+          input(type='hidden',name='productid', required='true', value=prod._id )
+
+        button(type='submit') Delete

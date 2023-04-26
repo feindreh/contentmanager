@@ -12,8 +12,12 @@ block content
         dt
           a(href=prod.url) #{prod.name}
         dd #{prod.description}
+  else if img !== null 
+    p Delete 
+      a(href="/shop/subcategory/"+subCat._id+"/image") Image
+      |  before attempting to delete this Sub Category
   else
-    p Do you really want to delete this Sub-Category?
+    p Do you really want to delete this Sub Category?
     form(method='POST' action='')
       div
         input(type='hidden',name='subcategoryid', required='true', value=subCat._id )

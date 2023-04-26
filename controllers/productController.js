@@ -64,9 +64,10 @@ exports.product_read = async (req, res, next) => {
     if (prod === null) {
       throw new Error(' Prod Not Found');
     }
-
+    const imageURL = `/shop/product/getImage/${req.params.id}`;
     res.render('product_read', {
       prod,
+      imageURL,
     });
   } catch (error) {
     next(error);

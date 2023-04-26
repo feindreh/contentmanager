@@ -28,10 +28,11 @@ exports.subcategory_read = async (req, res, next) => {
     if (subCat === null) {
       throw new Error(' subCat Not Found');
     }
-
+    const imageURL = `/shop/subcategory/getImage/${req.params.id}`;
     res.render('subcategory_read', {
       subCat,
       products,
+      imageURL,
     });
   } catch (error) {
     next(error);

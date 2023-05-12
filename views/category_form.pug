@@ -1,15 +1,15 @@
 extends layout
 
 block content
-    p #{title}
 
-    p #{err}
+    p.title #{title}
+    p.error #{err}
 
-    form(method='POST' action='' enctype="multipart/form-data")
-        label(for='name') Name:
-        input#name(type='text', name='name', required,value=(undefined===name ? '' : name))
-        br
-        label(for='description') description:
-        input#description(type='text', name='description', required,value=(undefined===description  ? '' : description))
-        br
-        button(type='submit') Submit
+    form.create(method='POST' action='' enctype="multipart/form-data")
+        div.inputWrap
+            label(for='name') Name :
+            input.input#name(type='text', name='name', required,value=(undefined===name ? '' : name))
+        div.inputWrap     
+            label(for='description') Description :
+            input.input#description(type='text', name='description', required,value=(undefined===description  ? '' : description))
+        button.button(type='submit') Submit

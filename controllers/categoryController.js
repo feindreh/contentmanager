@@ -29,7 +29,7 @@ exports.category_list = async (req, res) => {
 
 // display create form
 exports.category_create_get = (req, res) => {
-  res.render('category_form', { title: 'New Category' });
+  res.render('category_form', { title: 'Create a new Category' });
 };
 
 // create new Category

@@ -44,7 +44,7 @@ exports.category_create_post = async (req, res) => {
       title: 'New Category',
       name,
       description,
-      err: `Category Name: ${name} already in use`,
+      err: `Category Name: "${name}" already in use`,
     });
   } else {
     // save category

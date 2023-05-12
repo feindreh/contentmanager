@@ -1,0 +1,42 @@
+/*form styles*/
+
+.title{
+    /*Class for title */
+    font-size: var(--big);
+}
+
+.error{
+    /*Class for error */
+}
+
+.create{
+    /*Class for forms element*/
+    display: flex;
+    flex-direction: column;
+    gap: var(--normal);
+    border: solid var(--dark) 2px;
+    padding: var(--normal);
+    align-items: flex-end;
+
+}
+.inputWrap{
+    /* Wrap around label+input*/
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--normal);
+    align-items: center;
+}
+
+.input{
+    font-size: var(--normal);
+    padding: var(--small)
+}
+
+.button{
+    /*Class for button*/
+    width: calc(var(--normal)*5);
+    border-radius: var(--small);
+    font-size:var(--normal);
+    color:var(--light);
+    background-color: var(--dark);
+}

@@ -24,7 +24,7 @@
     align-content: center;
     flex-wrap:wrap;
     gap:var(--normal);
-    width: 100vw;
+    width: 100%;
     min-height: calc(var(--normal)*3);
     background: linear-gradient(90deg, rgb(33, 73, 58) 0%, rgb(64, 109, 86) 100%);
 }

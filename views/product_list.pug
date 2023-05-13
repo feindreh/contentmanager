@@ -1,12 +1,12 @@
 extends layout
 
 block content
-  p  #{title}
-  ul
+  p.title  #{title}
+  div.list
     each item in list
-      li
-        a(href=item.url) #{item.name}
-        |  #{item.description}
+      div.listItem
+        a.itemTitle(href=item.url) #{item.name}
+        div.text #{item.description}
 
     else
-      li There are no Products.
+      p There are no Products.

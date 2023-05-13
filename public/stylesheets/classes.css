@@ -1,9 +1,10 @@
-/*form styles*/
-
 .title{
     /*Class for title */
     font-size: var(--big);
 }
+
+/*form styles*/
+
 
 .error{
     /*Class for error */
@@ -40,4 +41,27 @@
     font-size:var(--normal);
     color:var(--light);
     background-color: var(--dark);
+}
+/*list*/
+.list{
+    /*Class for lists*/
+    display: flex;
+    flex-direction: column;
+    gap:var(--normal);
+}
+.listItem{
+    display:flex;
+    flex-direction: column;
+    gap:var(--small);
+}
+
+.itemTitle{
+    width: fit-content;
+    border-bottom: solid 2px var(--dark);
+    
+}
+
+.text{
+    /*Class for text*/
+    font-size: var(--small);
 }

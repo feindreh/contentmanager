@@ -51,7 +51,7 @@ exports.category_create_post = async (req, res) => {
     const cat = new Category({
       name, description,
     });
-    cat.save();
+    await cat.save();
     res.redirect('/shop/categorys');
   }
 };

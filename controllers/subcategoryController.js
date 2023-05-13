@@ -7,14 +7,6 @@ exports.subcategory_list = async (req, res) => {
   const subCats = await SubCategory.find({});
   res.render('subcategory_list', { list: subCats, title: 'Sub-Category List' });
 };
-
-// display create form
-exports.subcategory_create_get = async (req, res) => {
-  const categorys = await Category.find({});
-  const err = [];
-  res.render('subcategory_form', { title: 'New Sub-Category', categorys, err });
-};
-
 // display single subcat
 exports.subcategory_read = async (req, res, next) => {
   try {
@@ -38,6 +30,19 @@ exports.subcategory_read = async (req, res, next) => {
     next(error);
   }
 };
+// display create form
+exports.subcategory_create_get = async (req, res) => {
+  const categorys = await Category.find({});
+  const err = [];
+  res.render(
+    'subcategory_form',
+    {
+      title: 'Create a new Sub-Category',
+      categorys,
+      err,
+    },
+  );
+};
 
 // create new subcat
 exports.subcategory_create_post = async (req, res, next) => {
@@ -59,7 +64,7 @@ exports.subcategory_create_post = async (req, res, next) => {
 
     if (err.length > 0) {
       res.render('subcategory_form', {
-        title: 'New Sub-Category',
+        title: 'Create a new Sub-Category',
         name,
         description,
         categorys,

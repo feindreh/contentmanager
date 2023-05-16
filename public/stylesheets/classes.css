@@ -1,6 +1,7 @@
 .title{
     /*Class for title */
     font-size: var(--big);
+    margin:var(--big);
 }
 
 /*form styles*/
@@ -41,6 +42,10 @@
     font-size:var(--normal);
     color:var(--light);
     background-color: var(--dark);
+    padding:calc(var(--small)/2);
+}
+.button{
+    
 }
 /*list*/
 .list{

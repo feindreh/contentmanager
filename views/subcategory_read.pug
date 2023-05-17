@@ -1,27 +1,25 @@
 extends layout
-
 block content
+  div.readHead
+    a.button(href=subCat.url+'/update') Update Sub-Category
+    a.button(href=subCat.url+'/image') Edit Image
+    a.button(href=subCat.url+'/delete') Delete Sub-Category
+  div.border
+    div.read
+      p.entry.left Sub-Category 
+      p.entry.right #{subCat.name}
+      p.entry.left Description
+      p.entry.right #{subCat.description}
+      p.entry.left Image
+      div.entry.right
+        img(src=imageURL alt="No Image")
+      p.entry.left Products
+      div.entry.right
+        div.list
+          each prod in products
+            div.readSub
+              a.readSubTitle(href=prod.url) #{prod.name}
+              p.readSubText #{prod.description}
+          else
+            p This Sub-Cat has no Products.
 
-  h1 Sub-Category: #{subCat.name}
-  p #{subCat.description}
-  img(src=imageURL alt="No Image")
-  div
-
-    h4 Products
-
-    dl
-      each prod in products
-        dt
-          a(href=prod.url) #{prod.name}
-        dd #{prod.description}
-
-      else
-        p This Sub-Cat has no Products.
-
-  hr
-  p 
-    a(href=subCat.url+"/image") Edit Image
-  p
-    a(href=subCat.url+'/delete') Delete Sub Category
-  p
-    a(href=subCat.url+'/update') Update Sub Category

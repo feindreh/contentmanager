@@ -1,16 +1,18 @@
 extends layout
 
 block content
-
-  h1 Products: #{prod.name}
-  p #{prod.description}
-  p  Price : #{prod.price}
-  
-  img(src=imageURL alt="No Image")
-  hr
-  p 
-    a(href=prod.url+'/image') Edit Image
-  p
-    a(href=prod.url+'/delete') Delete Product
-  p
-    a(href=prod.url+'/update') Update Product
+  div.readHead
+    a.button(href=prod.url+'/update') Update Product
+    a.button(href=prod.url+'/image') Edit Image
+    a.button(href=prod.url+'/delete') Delete Product
+  div.border
+    div.read
+      p.entry.left Products 
+      p.entry.right #{prod.name}
+      p.entry.left Description
+      p.entry.right #{prod.description}
+      p.entry.left Price
+      p.entry.right #{prod.price} €
+      p.entry.left Image
+      div.entry.right
+        img(src=imageURL alt="No Image")

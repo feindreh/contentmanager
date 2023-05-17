@@ -1,29 +1,25 @@
 extends layout
 
 block content
-
-  h1 Category: #{cat.name}
-  p #{cat.description}
-  img(src=imageURL alt="No Image")
-  div
-
-    h4 subCats
-
-    
-
-    dl
-      each subCat in subCats
-        dt
-          a(href=subCat.url) #{subCat.name}
-        dd #{subCat.description}
-
-      else
-        p This Cat has no Sub Cats.
-
-  hr
-  p 
-    a(href=cat.url+'/image') Edit Image
-  p
-    a(href=cat.url+'/delete') Delete Category
-  p
-    a(href=cat.url+'/update') Update Category 
+  div.readHead
+    a.button(href=cat.url+'/update') Update Category
+    a.button(href=cat.url+'/image') Edit Image
+    a.button(href=cat.url+'/delete') Delete Category
+  div.border
+    div.read
+      p.entry.left Category 
+      p.entry.right #{cat.name}
+      p.entry.left Description
+      p.entry.right #{cat.description}
+      p.entry.left Image
+      div.entry.right
+        img(src=imageURL alt="No Image")
+      p.entry.left Sub Categorys
+      div.entry.right
+        div.list
+          each subCat in subCats
+            div.readSub
+              a.readSubTitle(href=subCat.url) #{subCat.name}
+              p.readSubText #{subCat.description}
+          else
+            p This Cat has no Sub Cats.

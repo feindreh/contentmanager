@@ -1,26 +1,24 @@
 extends layout
 
 block content
-  h1 Delete Sub-Category: #{subCat.name}
+  p.title Delete Sub-Category: #{subCat.name}
 
   if products.length
-    p #[strong Delete the following Products before attempting to delete this Sub Category.]
-    div
-      h4 Products
-      dl
+    p Delete the following Products before attempting to delete this Sub Category.
+    div.list
       each prod in products
-        dt
-          a(href=prod.url) #{prod.name}
-        dd #{prod.description}
+        div.readSub
+                a.readSubTitle(href=prod.url) #{prod.name}
+                p.readSubText #{prod.description}
   else if img !== null 
-    p Delete 
-      a(href="/shop/subcategory/"+subCat._id+"/image") Image
-      |  before attempting to delete this Sub Category
+    p Delete the connected 
+      a.marked(href="/shop/subcategory/"+subCat._id+"/image") Image
+      |  before attempting to delete this Product
   else
     p Do you really want to delete this Sub Category?
     form(method='POST' action='')
       div
         input(type='hidden',name='subcategoryid', required='true', value=subCat._id )
-      button(type='submit') Delete
+      button.button(type='submit') Delete
 
 

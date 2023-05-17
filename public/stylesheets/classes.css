@@ -3,6 +3,11 @@
     font-size: var(--big);
     margin:var(--big);
 }
+.subTitle{
+    font-size: var(--normal);
+    margin:var(--normal);
+    font-weight: bold;
+}
 
 /*form styles*/
 
@@ -37,16 +42,14 @@
 
 .button{
     /*Class for button*/
-    width: calc(var(--normal)*5);
+    /* width: calc(var(--normal)*5); */
     border-radius: var(--small);
     font-size:var(--normal);
     color:var(--light);
     background-color: var(--dark);
     padding:calc(var(--small)/2);
 }
-.button{
-    
-}
+
 /*list*/
 .list{
     /*Class for lists*/
@@ -70,3 +73,49 @@
     /*Class for text*/
     font-size: var(--small);
 }
+
+/* Read */
+.readHead{
+    margin:var(--normal);
+    display: flex;
+    justify-content: space-around;
+    gap:var(--normal);
+}
+.readHead > .button {
+    border-radius: var(--small);
+    background-color: var(--middle);
+    color:black;
+    border: solid var(--dark) 4px;
+}
+.border{
+    background-color: black;
+}
+.read{
+   display:grid;
+   grid-template-columns: 1fr  2fr; 
+   grid-gap: 4px;
+}
+
+.read > .entry {
+    background-color:var(--light);
+    padding:var(--normal)
+  }
+
+  .left{
+    font-size: var(--normal);
+  }
+  .right{
+    font-size: var(--normal);
+  }
+
+  .readSub{
+
+  }
+  .readSubTitle{
+    font-size: var(--normal);
+    border-bottom: solid var(--dark) 4px;
+  }
+  .readSubText{
+    font-size:var(--small);
+    margin:var(--small)
+  }

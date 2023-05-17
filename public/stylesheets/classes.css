@@ -8,6 +8,10 @@
     margin:var(--normal);
     font-weight: bold;
 }
+.marked{
+    font-weight: bold;
+    border-bottom:solid var(--dark) 2px;
+}
 
 /*form styles*/
 

@@ -21,8 +21,6 @@
 }
 
 .imgWrap{
-    max-height: 300px;
-    overflow: hidden;
 }
 .imgWrap>img{
     width:100%;

@@ -13,6 +13,13 @@
     border-bottom:solid var(--dark) 2px;
 }
 
+.textWrap{
+    display: flex;
+    justify-content: space-between;
+    gap:var(--small)
+    
+}
+
 /*form styles*/
 
 

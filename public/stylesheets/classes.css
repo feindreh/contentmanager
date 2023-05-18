@@ -20,6 +20,15 @@
     
 }
 
+.imgWrap{
+    max-height: 300px;
+    overflow: hidden;
+}
+.imgWrap>img{
+    width:100%;
+    height:auto
+}
+
 /*form styles*/
 
 

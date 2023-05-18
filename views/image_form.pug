@@ -2,14 +2,14 @@ extends layout
 
 block content
 
-    h2 Edit Image for the Category: #{name}
-    p #{description}
-
-    
+    p.title Edit Image
+    p.text for the Category: #{name}
     if (image === null) 
-        form(method='POST' action='' enctype="multipart/form-data")
-            input(type="file" name="image")
-            button(type='submit') Submit
+        form.create(method='POST' action='' enctype="multipart/form-data")
+            input.button(type="file" name="image")
+            button.button(type='submit') Submit
     else
-        img(src=ImageUrl alt="Image not loaded") 
-        a(href = "/shop/image/"+image._id+"/"+type+"/delete") delete Image?
+        a.button(href = "/shop/image/"+image._id+"/"+type+"/delete") Delete Image?
+        div.imgWrap
+            img(src=ImageUrl alt="Image not loaded") 
+        

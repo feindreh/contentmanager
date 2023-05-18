@@ -1,10 +1,16 @@
 extends layout
 
 block content
-  div
-    div.headline #{title}
-    p Content Manager is a web app that helps you manage our shop inventory.
-    p  Categorys: #{cats}
-    p  Sub-Categorys: #{subCats}
-    p  Products : #{prods}
+
+    div.title Content Manager
+    p.text Content Manager is a web app that helps you manage your shop inventory.
+    div.textWrap
+      a.marked(href="shop/categorys")  Categorys:
+      p #{cats}
+    div.textWrap
+      a.marked(href="shop/subcategorys") Sub-Categorys:
+      p #{subCats}
+    div.textWrap
+      a.marked(href="shop/products")  Products:
+      p #{prods}
   

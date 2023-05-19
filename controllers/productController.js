@@ -83,7 +83,7 @@ exports.product_update_get = async (req, res, next) => {
     ]);
 
     res.render('product_form', {
-      title: 'New Product',
+      title: 'Update Product',
       SubCategorys,
       name: prod.name,
       description: prod.description,

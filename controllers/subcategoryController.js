@@ -94,7 +94,7 @@ exports.subcategory_update_get = async (req, res, next) => {
     const { name, description, category } = subCat;
 
     res.render('subcategory_form', {
-      title: 'New Sub-Category',
+      title: 'Update Sub-Category',
       name,
       description,
       categorys,

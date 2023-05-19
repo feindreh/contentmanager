@@ -87,7 +87,7 @@ exports.category_update_get = async (req, res, next) => {
   try {
     const cat = await Category.findById(req.params.id);
     res.render('category_form', {
-      title: 'New Category',
+      title: 'Update Category',
       name: cat.name,
       description: cat.description,
     });
